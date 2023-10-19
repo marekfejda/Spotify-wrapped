@@ -1,6 +1,6 @@
 #-----------SETTINGS----------------
 CURRENT_YEAR = 2023
-MINIMAL_PODCAST_LENGHT_IN_MINUTES = 5
+MINIMAL_PODCAST_LENGHT_IN_MINUTES = 10
 file_prefix = "data\AccountData\MyData\\"
 file_names = ["StreamingHistory0.json", "StreamingHistory1.json", "StreamingHistory2.json", "StreamingHistory3.json", "StreamingHistory4.json"]
 #-----------------------------------
@@ -15,6 +15,9 @@ def daysElapsedFromFirstDayOfYear():
 
 music_ms_played = 0
 podcasts_ms_played = 0
+songs_played = 0
+podcasts_played = 0
+
 
 for file_name in file_names:
     with open(file_prefix+file_name, 'r', encoding='utf-8') as file:
@@ -28,8 +31,10 @@ for file_name in file_names:
             ms_played = entry.get("msPlayed")
             if MINIMAL_PODCAST_LENGHT_IN_MINUTES*60*1000 < ms_played:
                 podcasts_ms_played += ms_played
+                podcasts_played += 1
             else:
                 music_ms_played += ms_played
+                songs_played += 1
 
 
 music_minutes = music_ms_played // 1000 // 60
@@ -42,3 +47,4 @@ print(f"Total [minutes]: {total_minutes} -> {total_minutes // 60} hours and {tot
 print(f"Daily average [minutes]:", average)
 print(f"Music [minutes]: ", music_minutes)
 print(f"Podcasts [minutes]: ", podcasts_minutes)
+print(f"You've played {songs_played} songs and {podcasts_played} podcasts")
