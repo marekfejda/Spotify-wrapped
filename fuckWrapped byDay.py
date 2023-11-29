@@ -66,3 +66,19 @@ print(f"You've played {songs_played} songs and {podcasts_played} podcasts")
 # Print daily minutes played without decimals
 for date, minutes in sorted(daily_minutes_played.items()):
     print(f"Minutes played on {date.strftime('%Y-%m-%d')}: {int(minutes)} minutes")
+
+
+# Print daily minutes played without decimals and update max_minutes_played_in_a_day
+max_minutes_played_in_a_day = 0
+date_of_max_minutes = None
+for date, minutes in sorted(daily_minutes_played.items()):
+    print(f"Minutes played on {date.strftime('%Y-%m-%d')}: {int(minutes)} minutes")
+
+    # Update max_minutes_played_in_a_day and date_of_max_minutes if the current day's minutes played is greater
+    if minutes > max_minutes_played_in_a_day:
+        max_minutes_played_in_a_day = minutes
+        date_of_max_minutes = date
+
+# Print the maximum minutes played in a day
+print(f"\nMaximum minutes played in a day: {int(max_minutes_played_in_a_day)} minutes")
+print(f"Date of the maximum minutes played: {date_of_max_minutes.strftime('%Y-%m-%d')}")
